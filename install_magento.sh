@@ -28,6 +28,7 @@ find . -type d -exec chmod 700 {} \; && find . -type f -exec chmod 600 {} \;
 
 # Create The Database
 echo "CREATE DATABASE magento2" | mysql -uroot -p
+
 base_url=""
 db_name=""
 db_user=""
@@ -36,16 +37,16 @@ admin_passwd=""
 
 # Command Line Installer
 php bin/magento setup:install 
---base-url="http://localhost:8080/" 
---db-host="localhost" 
---db-name="magento2" 
---db-user="root" 
---db-password="" 
+--base-url="http://${base_url}:8080/" 
+--db-host="${base_url}" 
+--db-name="${db_name}" 
+--db-user="${db_user}" 
+--db-password="${db_passwd}" 
 --admin-firstname="admin" 
 --admin-lastname="admin" 
---admin-email="user@localhost.com" 
+--admin-email="user@${base_url}.com" 
 --admin-user="admin" 
---admin-password="@dmin123" 
+--admin-password="${admin_passwd}" 
 --language="en_US" 
 --currency="USD" 
 --timezone="America/Chicago" 
