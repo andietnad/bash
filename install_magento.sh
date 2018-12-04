@@ -28,6 +28,11 @@ find . -type d -exec chmod 700 {} \; && find . -type f -exec chmod 600 {} \;
 
 # Create The Database
 echo "CREATE DATABASE magento2" | mysql -uroot -p
+base_url=""
+db_name=""
+db_user=""
+db_passwd=""
+admin_passwd=""
 
 # Command Line Installer
 php bin/magento setup:install 
