@@ -1,11 +1,5 @@
 #! /bin/sh
-
-
-# Create .my.cnf in the root directory to be able to use "mysql -uroot"
-sudo touch /.my.cnf
-echo "[client]" > /root/.my.cnf
-echo "user=root" >> /root/.my.cnf
-echo "password=" >> /root/.my.cnf
+# Setup a magento2 dev env
 
 # Install composer and magento (check if you need all those sudo)
 sudo curl -sS https://getcomposer.org/installer | php
@@ -15,17 +9,23 @@ sudo chmod +x /usr/local/bin/composer
 # check netstat command and make sure the HTTP port 80 is on the 'LISTEN' state.
 netstat -plntu
 
-# Download Magento 2
-# Magento Access Keys
+# Display Magento Access Keys to be used for magento repo
 public_key="321917537e9fb97818857db627483668"
 private_key="e7e3cec1745c3e673521943367f466ab"
-
+echo "Public Key: $public_key"
+echo "Private Key: $private_key"
+# Download Magento 2
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition .
 
 # Set Up Permissions
 # it take to log time using this method.
 find . -type d -exec chmod 700 {} \; && find . -type f -exec chmod 600 {} \;
 
+# Create .my.cnf in the root directory to be able to use "mysql -uroot"
+sudo touch /.my.cnf
+echo "[client]" > /root/.my.cnf
+echo "user=root" >> /root/.my.cnf
+echo "password=" >> /root/.my.cnf
 # Generate database passwd automatically
 db_passwd="$(openssl rand -base64 12)"
 # Create database user name
