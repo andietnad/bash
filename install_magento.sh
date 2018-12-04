@@ -26,7 +26,7 @@ sudo touch /.my.cnf
 echo "[client]" > /root/.my.cnf
 echo "user=root" >> /root/.my.cnf
 echo "password=" >> /root/.my.cnf
-# Generate database passwd automatically
+# Generate database random passwd
 db_passwd="$(openssl rand -base64 12)"
 # Create database user name
 read -p "Enter magento 2 database user name: " db_user
