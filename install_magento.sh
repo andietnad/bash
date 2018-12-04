@@ -33,9 +33,11 @@ read -p "Enter magento 2 database user name: " db_user
 echo "CREATE USER ${db_user}@localhost IDENTIFIED BY '${db_passwd}';" | mysql -uroot
 # Create database name
 read -p "Enter magento 2 database name: " db_name
-echo "CREATE DATABASE $db_name" | mysql -uroot
+echo "CREATE DATABASE $db_name;" | mysql -uroot
 # Grand database access
 echo "GRANT ALL PRIVILEGES ON ${db_name}.* TO '${db_user}'@'localhost';" | mysql -uroot
+# flush privileges
+echo "FLUSH PRIVILEGES;" | mysql -uroot
 # Display database credentials
 echo "+ user: $db_user"
 echo "+ db name: $db_name"
