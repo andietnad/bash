@@ -7,7 +7,7 @@ echo "[client]" > /root/.my.cnf
 echo "user=root" >> /root/.my.cnf
 echo "password=" >> /root/.my.cnf
 
-# Install composer and magento
+# Install composer and magento (check if you need all those sudo)
 sudo curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 sudo chmod +x /usr/local/bin/composer
@@ -26,13 +26,22 @@ composer create-project --repository-url=https://repo.magento.com/ magento/proje
 # it take to log time using this method.
 find . -type d -exec chmod 700 {} \; && find . -type f -exec chmod 600 {} \;
 
-# Create The Database
-echo "CREATE DATABASE magento2" | mysql -uroot -p
+# Generate database passwd automatically
+db_passwd="$(openssl rand -base64 12)"
+# Create database user name
+read -p "Enter magento 2 database user name: " db_user
+echo "CREATE USER ${db_user}@localhost IDENTIFIED BY '${db_passwd}';" | mysql -uroot
+# Create database name
+read -p "Enter magento 2 database name: " db_name
+echo "CREATE DATABASE $db_name" | mysql -uroot
+# Grand database access
+echo "GRANT ALL PRIVILEGES ON ${db_name}.* TO '${db_user}'@'localhost';" | mysql -uroot
+# Display database credentials
+echo "+ user: $db_user"
+echo "+ db name: $db_name"
+echo "+ passwd: $db_passwd"
 
 base_url=""
-db_name=""
-db_user=""
-db_passwd=""
 admin_passwd=""
 
 # Command Line Installer
