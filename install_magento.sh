@@ -1,6 +1,17 @@
 #! /bin/sh
 # Setup a magento2 dev env
 
+# Creating user and add it to sudo group
+
+# ask the user to imput the name of the user
+read -p "Enter user name: " user_name
+# add a user
+sudo adduser $user_name
+# add the new user to the sudo group
+sudo usermod -aG sudo $user_name
+# list all the groups in wich your new user is in.
+sudo groups $user_name
+
 # Install composer and magento (check if you need all those sudo)
 sudo curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
