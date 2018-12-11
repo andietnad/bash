@@ -4,7 +4,7 @@
 
 # Create .my.cnf in the root directory to be able to use "mysql -uroot"
 touch /.my.cnf
-read -p "Passwd for root account: " PASSWD_ROOT
+read -p "Passwd for mysql root account: " PASSWD_ROOT
 echo "[client]" > /root/.my.cnf
 echo "user=root" >> /root/.my.cnf
 echo "password=$PASSWD_ROOT" >> /root/.my.cnf
@@ -23,7 +23,7 @@ echo "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'localhost';" | mysql
 # flush privileges
 echo "FLUSH PRIVILEGES;" | mysql -uroot
 # Display database credentials
-echo "+ user: $DB_USER"
-echo "+ db name: $DB_NAME"
-echo "+ passwd: $DB_PASSWD"
+echo "+ Database user: $DB_USER"
+echo "+ Database name: $DB_NAME"
+echo "+ Database passwd: $DB_PASSWD"
 
