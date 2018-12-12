@@ -24,6 +24,8 @@ read -p "Database name: " DB_NAME
 read -p "Database user: " DB_USER
 read -p "Database passwd: " DB_PASSWD
 
+cd $PROJECT_NAME
+
 bin/magento setup:install \
 --base-url=http://${BASE_URL}/ \
 --db-host=localhost \
