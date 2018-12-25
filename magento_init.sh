@@ -1,5 +1,5 @@
 #! /bin/bash
-# This script intend to install a magento website fully functional.
+# This script intend to install a magento fully functional.
 # php7.1
 # nginx
 # mariadb
