@@ -4,7 +4,7 @@
 # check system swap
 swapon -s
 # create swap file
-fallocate -l 1G /swapfile
+fallocate -l 2G /swapfile
 chmod 600 /swapfile
 # make it swap
 mkswap /swapfile
